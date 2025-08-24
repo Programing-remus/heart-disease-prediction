@@ -1,7 +1,6 @@
 import pandas as pd 
 
-# Test pandas functionalities on the csv file
-# https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download - check this to learn about manipulating heart data
+# Use Tkinter to create a user interface
 
 # Feature 1 - Probability of heart disease (I can still use 3 functions in this and be done with it)
 # Use pandas to clean data set - remove duplicate data ? remove some columns ?
@@ -20,6 +19,9 @@ import pandas as pd
 ############################################################################################################
 
 # Feature 3
+
+# Test pandas functionalities on the csv file
+# https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download - check this to learn about manipulating heart data
 
 print("Test pandas on the heart.csv file")
 heart_data = pd.read_csv("heart.csv", sep=",")
