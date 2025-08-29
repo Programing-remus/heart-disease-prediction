@@ -1,12 +1,12 @@
 import pandas as pd 
+import numpy as np
 
-# Use Tkinter to create a user interface
-
+#FEATURES
+############################################################################################################
 # Feature 1 - Probability of heart disease (I can still use 3 functions in this and be done with it)
 # Use pandas to clean data set - remove duplicate data ? remove some columns ?
 # Logistic regression
 # Probability of heart disease via input
-
 ############################################################################################################
 # Feature 2 - Check what parameters are not healthy
 # Use formulas for the max heart-rate
@@ -18,7 +18,17 @@ import pandas as pd
 # Use pandas categorical data for range ?
 ############################################################################################################
 
-# Feature 3
+#STRATEGY
+#1 - Structure main file:
+# + model training
+# + input from patient
+# + data treatment and feature implementation
+
+#2 - Start small: interface in the terminal and model training with a very small dataset in the main file
+
+#3 - Submit50: README and video
+
+#4 - Next level: clone repository, make both private, aply larger dataset and tkinter interface, publish it on github
 
 # Test pandas functionalities on the csv file
 # https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download - check this to learn about manipulating heart data
@@ -44,16 +54,11 @@ import pandas as pd
 # print(len(a), len(set(a)))
 
 # Teste 2 - commit via pc
-def heart_rate(hr: int, age: int):
-    if hr > 220-age:
-        print("Warning: Heart-rate above normal")
-    else:
-        print("Healthy")
 
 def main():
-    hrate = int(input("Max heart rate: "))
-    age = int(input("Age: "))
-    heart_rate(hrate,age)
+    for i in range(3):
+        print(i)
+
 
 if __name__ == "__main__":
     main()
