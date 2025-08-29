@@ -41,17 +41,18 @@ def log_reg_model(x,y,alpha=0.1,min=10^-4):
     model = np.zeros((np.shape((x_int,1)),1)) # Initialize the model as a null matrix with n+1 columns
 
     # Iterates in a large range and breaks when the difference between the costs of the previous model and the updated one is less than min 
-    for _ in range(10000):
+    for i in range(1000):
         prev_model = model
         model -= alpha*get_gradient(model,x_int,y)
         if dif_cost(prev_model, model, x_int, y) < min:
+            print(f"Broke log_reg_model loop after {i} iterations") # Just to check if it is breaking before the range
             break
     return model
 
 # Returns data to use for training and separates data from labels, using pandas
 def select_train(df,size=10):
     ...
-    
+
 # Implementation of a class that allows manipulation of patient data:
 # Handle input
 class Patient():
@@ -59,8 +60,8 @@ class Patient():
 
 def main():
     data = pd.read_csv("heart.csv", sep=",")
-    X,Y = select_train(data)
-    heart_disease_predict = log_reg_model(X,Y)
+    patient_data, thal_label = select_train(data)
+    heart_disease_predict = log_reg_model(patient_data,thal_label)
     # test this with pytest. It would be cool to test accuracy in the future
 
 
