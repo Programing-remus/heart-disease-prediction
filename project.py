@@ -35,19 +35,20 @@ def entropy_loss(model, x, y):
         
 # Returns the difference between the cross entropy loss function of the previous model and the current 
 def dif_cost(prev_model,model,x,y):
-    return entropy_loss(prev_model,x,y) - entropy_loss(model,x,y)
+    return float(entropy_loss(prev_model,x,y) - entropy_loss(model,x,y))
 
 # Model training - implementing the gradient descent method from scratch to train the model
-def log_reg_model(x,y,alpha=0.1,min=10^-4):
+def log_reg_model(x,y,alpha=0.01,min=0.0001):
     m = np.shape(x)[0]
     col = np.ones((m,1))
     x_int = np.concatenate((col,x), axis=1) # Needed because of the bias (x0)
     model = np.zeros((np.shape((x_int))[1],1)) # Initialize the model as a null matrix with n+1 columns
 
     # Iterates in a large range and breaks when the difference between the costs of the previous model and the updated one is less than min 
-    for i in range(1000):
+    for i in range(10000):
         prev_model = model
-        model -= alpha*get_gradient(model,x_int,y)
+        model = prev_model - alpha*get_gradient(prev_model,x_int,y)
+        # print(entropy_loss(prev_model, x_int,y), entropy_loss(model, x_int,y))
         if dif_cost(prev_model, model, x_int, y) < min:
             print(f"Broke log_reg_model loop after {i} iterations") # Just to check if it is breaking before the range
             break
