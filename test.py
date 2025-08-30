@@ -1,5 +1,6 @@
 import pandas as pd 
 import numpy as np
+from project import get_gradient
 
 #FEATURES
 ############################################################################################################
@@ -54,11 +55,25 @@ import numpy as np
 # print(len(a), len(set(a)))
 
 # Teste 2 - commit via pc
+def sigmoid(z, dec=3):
+    def sig(z_i):
+        return round(float(1/(1+np.exp(-z_i))), dec)
+    if type(z) in (float, int):
+        return sig(z)
+    elif type(z) == list:
+        return list(map(sig, z))
+    elif type(z) == np.ndarray:
+        return np.array(sig(zi) for zi in z)
+    else:
+        raise TypeError("Argument must be list, float or numpy array (mx1)")
 
 def main():
-    for i in range(3):
-        print(i)
-
-
+    # theta = np.zeros((2,1))
+    # print(theta)
+    # grad = get_gradient(theta, np.array([[1, 6], [2, 7], [3, 8], [4, 9],[5,10]]), np.transpose(np.array([1,0,0,1,0])))
+    # print(grad)
+    
+    print(sigmoid(np.zeros((2,1))))        
+       
 if __name__ == "__main__":
     main()

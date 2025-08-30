@@ -12,8 +12,8 @@ import pandas as pd
 # grad - gradient of the cross entropy loss function
 # heart_disease_predict - logistic regression model for the prediction of heart disease risk
 
-def sigmoid(z):
-    return 1/(1+np.exp(-z))
+def sigmoid(z, dec=3):
+    return 1.0/(1.0 + np.exp(-z))
 
 # Calculate the gradient of the cross entropy loss function
 def get_gradient(model,x,y):
@@ -61,7 +61,7 @@ class Patient():
 def main():
     data = pd.read_csv("heart.csv", sep=",")
     patient_data, thal_label = select_train(data)
-    heart_disease_predict = log_reg_model(patient_data,thal_label)
+    heart_disease_risk_predict = log_reg_model(patient_data,thal_label)
     # test this with pytest. It would be cool to test accuracy in the future
 
 
