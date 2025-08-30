@@ -57,10 +57,17 @@ from project import get_gradient
 # Teste 2 - commit via pc
 def sigmoid(z, dec=3):
     return 1.0/(1.0 + np.exp(-z))
-    
+
 def h(model,x):
     return sigmoid(x @ model)
 
+# Calculate the gradient of the cross entropy loss function
+def get_gradient(model,x,y):
+    m = np.shape(x)[0] # m is the number of instances, in this case, the lines of the data frame that originated x
+    grad = (np.transpose(x) @ (h(model,x)-y))/m
+    return grad
+
+# Calculates the cross entropy loss function of a given model, trained with x vector and y vector for labels
 def entropy_loss(model, x, y):
     m = np.shape(x)[0]
     J = []
@@ -68,13 +75,43 @@ def entropy_loss(model, x, y):
         j = y[i]*np.log(h(model,x)[i]) + (1-y[i])*np.log(1-h(model,x)[i])
         J.append(j)
     return (-sum(J)/m).item()
+        
+# Returns the difference between the cross entropy loss function of the previous model and the current 
+def dif_cost(prev_model,model,x,y):
+    return float(entropy_loss(prev_model,x,y) - entropy_loss(model,x,y))
+
+# Model training - implementing the gradient descent method from scratch to train the model
+def log_reg_model(x,y,alpha=0.01,min=0.0001):
+    m = np.shape(x)[0]
+    col = np.ones((m,1))
+    x_int = np.concatenate((col,x), axis=1) # Needed because of the bias (x0)
+    model = np.zeros((np.shape((x_int))[1],1)) # Initialize the model as a null matrix with n+1 columns
+
+    # Iterates in a large range and breaks when the difference between the costs of the previous model and the updated one is less than min 
+    for i in range(10000):
+        prev_model = model
+        model = prev_model - alpha*get_gradient(prev_model,x_int,y)
+        # print(entropy_loss(prev_model, x_int,y), entropy_loss(model, x_int,y))
+        if dif_cost(prev_model, model, x_int, y) < min:
+            print(f"Broke log_reg_model loop after {i} iterations") # Just to check if it is breaking before the range
+            break
+    return model
 
 def main():
-    model = np.zeros((2,1)) # 2x1
-    x = np.array([[1, 6], [2, 7]]) # 5x2
-    y = np.transpose(np.array([[1,0]]))
-    print(entropy_loss(model,x,y))
-  
-       
+
+    # 6 samples, 2 features each
+    X = np.array([
+        [0.5, 1.2],
+        [1.0, 1.8],
+        [1.5, 2.5],
+        [3.0, 3.2],
+        [3.5, 4.0],
+        [4.0, 4.5]
+    ])
+
+    # Corresponding binary labels
+    Y = np.transpose(np.array([[0, 0, 0, 1, 1, 1]]))
+    print(log_reg_model(X,Y))
+        
 if __name__ == "__main__":
     main()

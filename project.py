@@ -15,14 +15,14 @@ import pandas as pd
 def sigmoid(z, dec=3):
     return 1.0/(1.0 + np.exp(-z))
 
+def h(model,x):
+    return sigmoid(x @ model)
+
 # Calculate the gradient of the cross entropy loss function
 def get_gradient(model,x,y):
     m = np.shape(x)[0] # m is the number of instances, in this case, the lines of the data frame that originated x
     grad = (np.transpose(x) @ (h(model,x)-y))/m
     return grad
-
-def h(model,x):
-    return sigmoid(x @ model)
 
 # Calculates the cross entropy loss function of a given model, trained with x vector and y vector for labels
 def entropy_loss(model, x, y):
@@ -40,8 +40,9 @@ def dif_cost(prev_model,model,x,y):
 # Model training - implementing the gradient descent method from scratch to train the model
 def log_reg_model(x,y,alpha=0.1,min=10^-4):
     m = np.shape(x)[0]
-    x_int = np.concatenate((np.ones(m),x), axis=1) # Needed because of the bias (x0)
-    model = np.zeros((np.shape((x_int,1)),1)) # Initialize the model as a null matrix with n+1 columns
+    col = np.ones((m,1))
+    x_int = np.concatenate((col,x), axis=1) # Needed because of the bias (x0)
+    model = np.zeros((np.shape((x_int))[1],1)) # Initialize the model as a null matrix with n+1 columns
 
     # Iterates in a large range and breaks when the difference between the costs of the previous model and the updated one is less than min 
     for i in range(1000):
