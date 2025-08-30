@@ -13,5 +13,14 @@ def test_sigmoid():
 def test_get_gradient():
     model = np.zeros((2,1)) # 2x1
     x = np.array([[1, 6], [2, 7], [3, 8], [4, 9], [5,10]]) # 5x2
-    y = np.transpose(np.array([1,1,0,1,0])) # 5x1
+    y = np.transpose(np.array([[1,1,0,1,0]])) # 5x1
     assert np.shape(get_gradient(model, x, y)) == (2,1)
+    x = np.array([[1, 6], [2, 7]]) # 5x2
+    y = np.transpose(np.array([[1,0]]))
+    assert np.all(get_gradient(model,x,y)==0.25)
+
+def test_entropy_loss():
+    model = np.zeros((2,1)) # 2x1
+    x = np.array([[1, 6], [2, 7]]) # 5x2
+    y = np.transpose(np.array([[1,0]]))
+    assert entropy_loss(model,x,y) == float((-2*np.log(0.5)/2).item())

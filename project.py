@@ -18,17 +18,20 @@ def sigmoid(z, dec=3):
 # Calculate the gradient of the cross entropy loss function
 def get_gradient(model,x,y):
     m = np.shape(x)[0] # m is the number of instances, in this case, the lines of the data frame that originated x
-    grad = (np.transpose(x) @ (sigmoid(x @ model)-y))/m
+    grad = (np.transpose(x) @ (h(model,x)-y))/m
     return grad
+
+def h(model,x):
+    return sigmoid(x @ model)
 
 # Calculates the cross entropy loss function of a given model, trained with x vector and y vector for labels
 def entropy_loss(model, x, y):
     m = np.shape(x)[0]
     J = []
     for i in range(m):
-        j = y[i]*np.log(sigmoid(x[i]*model[i]))+(1-y[i])*np.log(1-sigmoid(x[i]*model[i]))
+        j = y[i]*np.log(h(model,x)[i]) + (1-y[i])*np.log(1-h(model,x)[i])
         J.append(j)
-    return -sum(J)/m
+    return (-sum(J)/m).item()
         
 # Returns the difference between the cross entropy loss function of the previous model and the current 
 def dif_cost(prev_model,model,x,y):

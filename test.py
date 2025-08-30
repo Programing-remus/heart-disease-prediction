@@ -56,24 +56,25 @@ from project import get_gradient
 
 # Teste 2 - commit via pc
 def sigmoid(z, dec=3):
-    def sig(z_i):
-        return round(float(1/(1+np.exp(-z_i))), dec)
-    if type(z) in (float, int):
-        return sig(z)
-    elif type(z) == list:
-        return list(map(sig, z))
-    elif type(z) == np.ndarray:
-        return np.array(sig(zi) for zi in z)
-    else:
-        raise TypeError("Argument must be list, float or numpy array (mx1)")
+    return 1.0/(1.0 + np.exp(-z))
+    
+def h(model,x):
+    return sigmoid(x @ model)
+
+def entropy_loss(model, x, y):
+    m = np.shape(x)[0]
+    J = []
+    for i in range(m):
+        j = y[i]*np.log(h(model,x)[i]) + (1-y[i])*np.log(1-h(model,x)[i])
+        J.append(j)
+    return (-sum(J)/m).item()
 
 def main():
-    # theta = np.zeros((2,1))
-    # print(theta)
-    # grad = get_gradient(theta, np.array([[1, 6], [2, 7], [3, 8], [4, 9],[5,10]]), np.transpose(np.array([1,0,0,1,0])))
-    # print(grad)
-    
-    print(sigmoid(np.zeros((2,1))))        
+    model = np.zeros((2,1)) # 2x1
+    x = np.array([[1, 6], [2, 7]]) # 5x2
+    y = np.transpose(np.array([[1,0]]))
+    print(entropy_loss(model,x,y))
+  
        
 if __name__ == "__main__":
     main()
