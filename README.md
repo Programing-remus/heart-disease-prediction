@@ -27,3 +27,5 @@ The goal of the algorithm is to find a set of paramenters (weights) that better 
 + The learning rate, "alpha", default value was chosen based on research and later validated by accuracy tests runned on the model.
 + The stopping criterion "min" ensures the loop breaks when the value returned by the cost function is no longer significant
 
+#### Dataset
+
