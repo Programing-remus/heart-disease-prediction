@@ -1,4 +1,4 @@
-# Heart disease risk prediction and cardiac health evaluation system
+# Cardiac health evaluation system and heart disease risk prediction using Logistic Regression model
 #### Video Demo:  <URL HERE>
 __Description__: This project was developped as my CS50's Introduction to Programming with Python final project and its main objective is to accurately predict the probability of heart disease of a patient based on the input of a set of heart health related parameters, namely cholesterol levels and blood pressure registrations. 
 ### Features
@@ -7,5 +7,23 @@ __Description__: This project was developped as my CS50's Introduction to Progra
 + Provides a clearer view of possible risk factors
 
 ### Implementation
-For the first part of the project, I decided to implement a Logistics Regression Model. In order to get a better understanding of how to implement the model from scratch, I made the mathematic deductions by hand and then translated them into code, using the numpy library. At its core a Logistics Regression Model training script takes a matrix with m instances (lines) and n parameters (coumns) - X - and a vector with a binary label (0 or 1) with m values (one for each instance in X)
+For the first part of the project, I decided to implement a Logistics Regression Model from scratch using numpy. In order to get a better understanding of the algorithm, I derived the mathematical formulas manually before translating them to code, creating several reusable functions to train any logistic regression models in the future.
+The training of the model requires:
+
++ a matrix, X, with dimentions mxn (with m instances and n parameters)
++ a vector, y, with a binary label (0 or 1) with m values (one for each instance in X)
+
+The goal of the algorithm is to find a set of paramenters (weights) that better represent the relationship between X and y, producing a model that accurately predicts the heart disease risk for new inputs.
+
+## Training Funcions:
++ sigmoid(z) - takes a numpy array or a scalar and computes its sigmoid
++ h(model, x) - returns the sigmoid of the matrix product of the model matrix and the input (x), representing the predicted probabilities
++ get_gradient(model,x,y) - commputes the gradient od the cross entropy loss funtion of the updated model
++ entropy_loss(model,x,y) - computes the cross entropy loss function of the updated model
++ cost(prev_model, model) - computes the difference between the cross entropy loss function of the previous model and the updated one.
++ log_reg_model(x,y,alpha=0.01,min=0.0001) - Initializes and trains a logistics regression model by iteratively updating weights using the gradient descent method. The loop is interrupted when 10000 iterations are completed or when the cost function returns a value smaller than min (default value=0.0001)** and the function returns a numpy array with the weights that correspond to the Logistic Regression model.
+
+# Notes:
++ The learning rate, "alpha", default value was chosen based on research and later validated by accuracy tests runned on the model.
++ The stopping criterion "min" ensures the loop breaks when the value returned by the cost function is no longer significant
 
