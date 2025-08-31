@@ -15,7 +15,7 @@ The training of the model requires:
 
 The goal of the algorithm is to find a set of paramenters (weights) that better represent the relationship between X and y, producing a model that accurately predicts the heart disease risk for new inputs.
 
-## Training Funcions:
+#### Training Funcions:
 + sigmoid(z) - takes a numpy array or a scalar and computes its sigmoid
 + h(model, x) - returns the sigmoid of the matrix product of the model matrix and the input (x), representing the predicted probabilities
 + get_gradient(model,x,y) - commputes the gradient od the cross entropy loss funtion of the updated model
@@ -23,7 +23,7 @@ The goal of the algorithm is to find a set of paramenters (weights) that better 
 + cost(prev_model, model) - computes the difference between the cross entropy loss function of the previous model and the updated one.
 + log_reg_model(x,y,alpha=0.01,min=0.0001) - Initializes and trains a logistics regression model by iteratively updating weights using the gradient descent method. The loop is interrupted when 10000 iterations are completed or when the cost function returns a value smaller than min (default value=0.0001)** and the function returns a numpy array with the weights that correspond to the Logistic Regression model.
 
-# Notes:
+##### Notes:
 + The learning rate, "alpha", default value was chosen based on research and later validated by accuracy tests runned on the model.
 + The stopping criterion "min" ensures the loop breaks when the value returned by the cost function is no longer significant
 
