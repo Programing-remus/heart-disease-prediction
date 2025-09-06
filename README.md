@@ -4,7 +4,7 @@ __Description__: This project was developped as my CS50's Introduction to Progra
 ### Features
 + Predict heart disease risk with logistic regression
 + Assess whether each of the inputs is within a healthy range
-+ Provides a clearer view of possible risk factors
++ Provide a clearer view of possible risk factors
 
 ### Implementation
 For the first part of the project, I decided to implement a Logistics Regression Model from scratch using numpy. In order to get a better understanding of the algorithm, I derived the mathematical formulas manually before translating them to code, creating several reusable functions to train any logistic regression models in the future.
@@ -28,4 +28,4 @@ The goal of the algorithm is to find a set of paramenters (weights) that better 
 + The stopping criterion "min" ensures the loop breaks when the value returned by the cost function is no longer significant
 
 #### Dataset
-
+The dataset used was extracted from https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download and then edited using pandas.
