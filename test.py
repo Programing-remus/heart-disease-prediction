@@ -98,20 +98,7 @@ def log_reg_model(x,y,alpha=0.01,min=0.0001):
     return model
 
 def main():
-
-    # 6 samples, 2 features each
-    X = np.array([
-        [0.5, 1.2],
-        [1.0, 1.8],
-        [1.5, 2.5],
-        [3.0, 3.2],
-        [3.5, 4.0],
-        [4.0, 4.5]
-    ])
-
-    # Corresponding binary labels
-    Y = np.transpose(np.array([[0, 0, 0, 1, 1, 1]]))
-    print(log_reg_model(X,Y))
+    ...
         
 if __name__ == "__main__":
     main()

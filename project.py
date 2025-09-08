@@ -32,7 +32,7 @@ def entropy_loss(model, x, y):
         j = y[i]*np.log(h(model,x)[i]) + (1-y[i])*np.log(1-h(model,x)[i])
         J.append(j)
     return (-sum(J)/m).item()
-        
+
 # Returns the difference between the cross entropy loss function of the previous model and the current 
 def dif_cost(prev_model,model,x,y):
     return float(entropy_loss(prev_model,x,y) - entropy_loss(model,x,y))
@@ -55,8 +55,11 @@ def log_reg_model(x,y,alpha=0.01,min=0.0001):
     return model
 
 # Returns data to use for training and separates data from labels, using pandas
-def select_train(df,size=10):
-    ...
+def select_train(df,label_name: str,size=10):
+    df2 = df.head(size)
+    y = df2.loc[:,label_name].values
+    X = df2.drop(label_name, axis=1).to_numpy()
+    return X, y
 
 # Implementation of a class that allows manipulation of patient data:
 # Handle input
@@ -65,11 +68,10 @@ class Patient():
 
 def main():
     data = pd.read_csv("heart.csv", sep=",")
-    patient_data, thal_label = select_train(data)
-    heart_disease_risk_predict = log_reg_model(patient_data,thal_label)
+    patient_data, thal_label = select_train(data, label_name="thal")
+    print(type(patient_data))
+    # heart_disease_risk_predict = log_reg_model(patient_data,thal_label)
     # test this with pytest. It would be cool to test accuracy in the future
-
-
 
 if __name__ == "__main__":
     main()
